@@ -61,11 +61,12 @@ struct TRViewSegundaPanalla: View {
                                     
                                     
                                 }
-                                    //.padding(.leading, 26.0)
-                                    .frame(height: 300)
-                                        .tint(.black)
-                                        .cornerRadius(8)
-                                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                                    .padding(.all, 40.0)
+                                    
+                                        //.tint(.black)
+                                        //.cornerRadius(8)
+                                       // .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                                
                                 )
                         Spacer()
                         HStack {

@@ -10,23 +10,8 @@ import SwiftUI
 struct TablasComparativasView: View {
     var body: some View {
         VStack {
-            // 🔹 Header
-            HStack {
-                Text("Tablas Comparativas")
-                    .font(.system(size: 48, weight: .bold))
-                    .foregroundStyle(.black)
-
-                Spacer()
-
-                Image(systemName: "person.crop.circle")
-                    .font(.system(size: 50))
-                    .foregroundStyle(.black)
-            }
-            .padding(.horizontal, 30)
-
-            // 🔹 TabView clásico (abajo)
             TabView {
-                PantallaPrincipal()
+                ContentView()
                     .tabItem {
                         Image(systemName: "chart.bar")
                         Text("Gráfica")
@@ -40,6 +25,7 @@ struct TablasComparativasView: View {
             .accentColor(.orange) // color del ítem activo
         }
     }
+    
 }
 
 #Preview {

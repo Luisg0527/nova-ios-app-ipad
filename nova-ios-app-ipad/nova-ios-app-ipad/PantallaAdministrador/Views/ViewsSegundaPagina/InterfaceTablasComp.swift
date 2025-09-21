@@ -48,12 +48,10 @@ struct InterfaceTablasComp: View {
                                     y : .value("Cantidad", item.CantidadRecetas)
                                     )
                                 }
-                                    .padding(.leading, 26.0)
-                                    .frame(height: 350)
-                                        .tint(.black)
+                                    .padding(.all, 45.0)
+                                    //.frame(height: 350)
+                                        //.tint(.black)
                                         .foregroundStyle(naranjanova)
-                                        .cornerRadius(8)
-                                        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
                                 )
                         //Spacer()
                         HStack {
@@ -61,6 +59,7 @@ struct InterfaceTablasComp: View {
                             Text("18/12/2025")
                                 .font(.system(size: 20))
                                 .foregroundStyle(.gray)
+                                .padding(.bottom, 20.0)
                             Spacer()
                         }
                     }.padding(10) //Padding para medir el texto
