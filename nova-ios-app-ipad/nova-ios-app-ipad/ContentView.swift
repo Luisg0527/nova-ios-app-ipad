@@ -1,8 +1,8 @@
 //
 //  ContentView.swift
-//  nova-ios-app-ipad
+//  TabViewEjemplo
 //
-//  Created by Luis Garza on 11/09/25.
+//  Created by Juan Pablo Escalona on 26/08/25.
 //
 
 import SwiftUI
@@ -10,14 +10,22 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            HStack {
+                Text("Dashboard")
+                    .font(.system(size: 48, weight: .bold))
+                    .foregroundStyle(.black)
+                
+                Spacer()
+                
+                Image(systemName: "person.crop.circle")
+                    .font(.system(size: 50))
+                    .foregroundStyle(.black)
+            }.padding(.horizontal, 30)
+            PantallaPrincipal()
         }
-        .padding()
+            
+            }
     }
-}
 
 #Preview {
     ContentView()
