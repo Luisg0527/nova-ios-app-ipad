@@ -28,7 +28,7 @@ struct InterfaceTablasComp: View {
                                 .font(.system(size: 30))
                                 .foregroundStyle(naranjanova)
                                 .frame(width:50, height : 50)
-                            Text(" Empleados Por Recetas")
+                            Text(" Análisis de ventas de recetas")
                                 //.font(.title)
                                 .font(.system(size: 35))
                                 .font(.headline)

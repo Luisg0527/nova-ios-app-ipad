@@ -16,6 +16,8 @@ let datosBarChart : [Receta] = [
 
 ]
 
+
+
 /*
 let datosXY : [Punto] = [
     Punto(x: 1, y: 2300)

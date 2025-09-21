@@ -1,7 +1,8 @@
 import SwiftUI
 import Charts
 
-struct InterfaceGraph: View {
+struct RecetaPorTIempo: View {
+    @State private var Empleadoseleccionado: Int = 0
     var body: some View {
         ZStack {
             let azulnova = Color(red: 3/255, green: 104/255, blue: 138/255)
@@ -17,21 +18,24 @@ struct InterfaceGraph: View {
                                 .font(.system(size: 30))
                                 .foregroundStyle(azulnova)
                                 .frame(width:50, height : 50)
-                            Text(" Recetas Vendidas")
+                            Text(" Duración por receta")
                                 .font(.title)
                                 .font(.headline)
                                 .foregroundStyle(.black)
                             Spacer()
-                            Picker(selection: .constant(1), label: Text("Elegir")) {
-                                Text("Juan Perez").tag(1)
-                                Text("Maria Gonzalez").tag(2)
-                                Text("Roberto Estrada").tag(3)
+                            Picker(selection: $Empleadoseleccionado, label: Text("Elegir")) {
+                                ForEach(listaEmpleadosVentanilla){ empleado in
+                                    Text("\(empleado.nombre) \(empleado.apellidoPaterno)").tag(empleado.id - 1)
+                                }
+//                                Text("Juan Perez").tag(1)
+//                                Text("Maria Gonzalez").tag(2)
+//                                Text("Roberto Estrada").tag(3)
 
                             }
                             .tint(.gray)
                         }
                         //Spacer()
-                        let recetas = datosBarChart[2].CantidadRecetas // 24
+                        let recetas = listaEmpleadosVentanilla[Empleadoseleccionado].pTiempoRecetas // 24
                         RoundedRectangle(cornerRadius: 16, style: .continuous)
                             .fill(Color.white)
                             .shadow(color: .black.opacity(0.08), radius: 8,x:0,y:2)
@@ -43,7 +47,8 @@ struct InterfaceGraph: View {
                                         .stroke(azulnova, lineWidth: 15)
 
                                     // texto central con el número total
-                                    Text("\(recetas)")
+                                    Text("\(recetas) Minutos")
+                                        .font(.system(size: 20))
                                         .font(.title)
                                         .bold()
                                         .foregroundColor(azulnova)
@@ -53,9 +58,10 @@ struct InterfaceGraph: View {
                             )
                         Spacer()
                         HStack{
+                            let diasT = listaEmpleadosVentanilla[Empleadoseleccionado].diasPorSemana
                             Text("Dias Trabajados")
                                 .foregroundStyle(.gray)
-                            Text("5")
+                            Text("\(diasT)")
                                 .foregroundStyle(azulnova)
                             Spacer()
                             Text("Due day 31/12/2018")
@@ -78,5 +84,5 @@ struct InterfaceGraph: View {
 }
 
 #Preview {
-    InterfaceGraph()
+    RecetaPorTIempo()
 }

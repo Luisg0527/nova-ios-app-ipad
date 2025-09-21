@@ -31,3 +31,4 @@ struct TablasComparativasView: View {
 #Preview {
     TablasComparativasView()
 }
+

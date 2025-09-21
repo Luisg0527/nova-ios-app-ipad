@@ -29,7 +29,7 @@ struct TRViewSegundaPanalla: View {
                                 .font(.system(size: 30))
                                 .foregroundStyle(naranjanova)
                                 .frame(width:50, height : 50)
-                            Text(" Tiempo Por Receta")
+                            Text(" Análisis de eficiencia por receta")
                                 //.font(.title)
                                 .font(.system(size: 35))
                                 .font(.headline)
