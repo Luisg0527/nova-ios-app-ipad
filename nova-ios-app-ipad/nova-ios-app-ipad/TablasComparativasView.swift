@@ -11,7 +11,7 @@ struct TablasComparativasView: View {
     var body: some View {
         VStack {
             TabView {
-                ContentView()
+                PantallaPrincipal()
                     .tabItem {
                         Image(systemName: "chart.bar")
                         Text("Gráfica")

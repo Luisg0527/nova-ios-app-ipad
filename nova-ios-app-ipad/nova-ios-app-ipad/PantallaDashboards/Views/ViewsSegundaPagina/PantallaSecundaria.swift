@@ -3,6 +3,7 @@ import SwiftUI
 struct PantallaSecundaria: View {
     var body: some View {
         VStack {
+            
             HStack {
                 Text("Análisis comparativo")
                     .font(.system(size: 48, weight: .bold))
@@ -10,9 +11,6 @@ struct PantallaSecundaria: View {
 
                 Spacer()
 
-                Image(systemName: "person.crop.circle")
-                    .font(.system(size: 50))
-                    .foregroundStyle(.black)
             }
             .padding(.horizontal, 30)
             ScrollView {

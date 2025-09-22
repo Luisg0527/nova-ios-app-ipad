@@ -1,10 +1,12 @@
 import SwiftUI
 import Charts
 
-struct RecetaPorTIempo: View {
-    @Binding var Empleadoseleccionado: Int
+struct InterfaceGraph: View {
+    @State private var Empleadoseleccionado: Int = 0
+    
     var body: some View {
-        VStack{
+        VStack {
+            
             ZStack {
                 let azulnova = Color(red: 3/255, green: 104/255, blue: 138/255)
                 //let naranjanovaa = Color(red: 255/255, green: 153/255, blue: 0/255)
@@ -19,24 +21,24 @@ struct RecetaPorTIempo: View {
                                     .font(.system(size: 30))
                                     .foregroundStyle(azulnova)
                                     .frame(width:50, height : 50)
-                                Text(" Duración por receta")
+                                Text(" Indicadores de ventas por empleado")
                                     .font(.title)
                                     .font(.headline)
                                     .foregroundStyle(.black)
                                 Spacer()
-                                //                            Picker(selection: $Empleadoseleccionado, label: Text("Elegir")) {
-                                //                                ForEach(listaEmpleadosVentanilla){ empleado in
-                                //                                    Text("\(empleado.nombre) \(empleado.apellidoPaterno)").tag(empleado.id - 1)
-                                //                                }
-                                ////                                Text("Juan Perez").tag(1)
-                                ////                                Text("Maria Gonzalez").tag(2)
-                                ////                                Text("Roberto Estrada").tag(3)
-                                //
-                                //                            }
-                                //                            .tint(.gray)
+                                Picker(selection: $Empleadoseleccionado, label: Text("Elegir")) {
+                                    ForEach(listaEmpleadosVentanilla){ empleado in
+                                        Text("\(empleado.nombre) \(empleado.apellidoPaterno)").tag(empleado.id - 1)
+                                    }
+                                    //                                Text("Juan Perez").tag(1)
+                                    //                                Text("Maria Gonzalez").tag(2)
+                                    //                                Text("Roberto Estrada").tag(3)
+                                    
+                                }
+                                .tint(.gray)
                             }
                             //Spacer()
-                            let recetas = listaEmpleadosVentanilla[Empleadoseleccionado].pTiempoRecetas // 24
+                            let recetas = listaEmpleadosVentanilla[Empleadoseleccionado].totalRecetas // 24
                             RoundedRectangle(cornerRadius: 16, style: .continuous)
                                 .fill(Color.white)
                                 .shadow(color: .black.opacity(0.08), radius: 8,x:0,y:2)
@@ -48,8 +50,7 @@ struct RecetaPorTIempo: View {
                                             .stroke(azulnova, lineWidth: 15)
                                         
                                         // texto central con el número total
-                                        Text("\(recetas) Minutos")
-                                            .font(.system(size: 20))
+                                        Text("\(recetas)")
                                             .font(.title)
                                             .bold()
                                             .foregroundColor(azulnova)
@@ -80,11 +81,13 @@ struct RecetaPorTIempo: View {
                 
                 
             }
+            RecetaPorTIempo(Empleadoseleccionado: $Empleadoseleccionado)
+            
             //Spacer()
         }
     }
 }
 
 #Preview {
-    RecetaPorTIempo(Empleadoseleccionado: .constant(0))
+    InterfaceGraph()
 }
