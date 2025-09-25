@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct EmpVentView: View {
+    @State var ventanillaActiva: Bool = true
     var body: some View {
         VStack{
             Spacer()
@@ -24,11 +25,11 @@ struct EmpVentView: View {
             
             Button(action:{
                 // algo
-            }){Text("Crear turno")
+            }){Text("Siguiente turno")
                     .frame(maxWidth: .infinity)
                     .padding(20)
                     .multilineTextAlignment(.center)
-                    .font(.system(size: 30))
+                    .font(.system(size: 40))
                     .tint(Color(red: 1/255, green: 104/255, blue: 138/255))
                     .fontWeight(.semibold)
             }
@@ -39,21 +40,20 @@ struct EmpVentView: View {
                 //.padding(.bottom, 32)
             
             Button(action:{
-                // algo
-            }){Text("Crear turno")
+                ventanillaActiva.toggle()
+            }){Text(ventanillaActiva ? "Cerrar ventanilla" : "Abrir ventanilla")
                     .frame(maxWidth: .infinity)
                     .padding(20)
                     .multilineTextAlignment(.center)
-                    .font(.system(size: 30))
+                    .font(.system(size: 40))
                     .tint(.white)
                     .fontWeight(.semibold)
             }
                 .frame(width: 500, height: 85)
                 .padding()
                 .background(Color(red: 1/255, green: 104/255, blue: 138/255, opacity: 0.0))
-                .cornerRadius(24)
                 .overlay(
-                    RoundedRectangle(cornerRadius: 20)
+                    RoundedRectangle(cornerRadius: 24)
                         .stroke(.white, lineWidth: 2)
                     
                 )
@@ -64,6 +64,8 @@ struct EmpVentView: View {
             LinearGradient(gradient: Gradient(colors: [Color(red: 1/255, green: 104/255, blue: 138/255), Color(red: 0/255, green: 66/255, blue: 88/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
             )
     }
+    
+    
 }
 
 #Preview {
