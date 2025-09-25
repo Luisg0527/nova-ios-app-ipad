@@ -23,7 +23,11 @@ struct ContentView: View {
                         Image(systemName: "doc.richtext.fill")
                         Text("Detalles")
                     }
-                
+                UsuarioView()
+                    .tabItem {
+                        Image(systemName: "doc.richtext.fill")
+                        Text("Usuario")
+                    }
             }
             .indexViewStyle(.page)
             

@@ -28,20 +28,20 @@ struct UsuarioView: View {
                 Spacer()
             }
             Text("Usuario")
-                .padding(.top, 20)
+                .padding(.top, 10)
                 .font(.system(size: 76))
                 .fontWeight(.bold)
                 .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
             
             Divider()
-                .tint(Color(red: 255/255, green: 153/255, blue: 0/255)).padding(.bottom,40)
+                .tint(Color(red: 255/255, green: 153/255, blue: 0/255)).padding(.bottom,30)
             
         
             
             
             HStack{
                 Text("Nombre")
-                    .font(.system(size: 32))
+                    .font(.system(size: 29))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                     .opacity(0.7)
@@ -52,7 +52,7 @@ struct UsuarioView: View {
             
             HStack{
                 Text("\(usuario.nombre)")
-                    .font(.system(size: 64))
+                    .font(.system(size: 58))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                     .padding(.leading, 50)
@@ -63,7 +63,7 @@ struct UsuarioView: View {
             
             HStack{
                 Text("Usuario")
-                    .font(.system(size: 32))
+                    .font(.system(size: 29))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                     .opacity(0.7)
@@ -76,7 +76,7 @@ struct UsuarioView: View {
                 
                 if (username != ""){
                     Text("\(username)")
-                        .font(.system(size: 64))
+                        .font(.system(size: 58))
                         .fontWeight(.bold)
                         .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                         .padding(.leading, 50)
@@ -84,7 +84,7 @@ struct UsuarioView: View {
                     
                 else{
                     Text("Username")
-                        .font(.system(size: 64))
+                        .font(.system(size: 58))
                         .fontWeight(.bold)
                         .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                         .padding(.leading, 50)
@@ -97,7 +97,7 @@ struct UsuarioView: View {
             
             HStack{
                 Text("Fecha de Nacimiento")
-                    .font(.system(size: 32))
+                    .font(.system(size: 29))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                     .opacity(0.7)
@@ -108,7 +108,7 @@ struct UsuarioView: View {
             
             HStack{
                 Text("\(formatFechaNacimiento(usuario.fechaNacimiento))")
-                    .font(.system(size: 64))
+                    .font(.system(size: 58))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                     .padding(.leading, 50)
@@ -119,7 +119,7 @@ struct UsuarioView: View {
             
             HStack{
                 Text("Clave")
-                    .font(.system(size: 32))
+                    .font(.system(size: 29))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                     .opacity(0.7)
@@ -130,7 +130,7 @@ struct UsuarioView: View {
             
             HStack{
                 Text("\(usuario.identificadorU)")
-                    .font(.system(size: 64))
+                    .font(.system(size: 58))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
                     .padding(.leading, 50)
@@ -166,7 +166,7 @@ struct UsuarioView: View {
                     RoundedRectangle(cornerRadius: 20)
                         .stroke(Color(red: 236/255, green: 48/255, blue: 48/255), lineWidth: 2)
                     
-                ).padding(.bottom, 20)
+                ).padding(.bottom, 65)
             
 
             ZStack{
