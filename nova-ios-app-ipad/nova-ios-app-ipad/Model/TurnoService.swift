@@ -97,5 +97,9 @@ class TurnoService: ObservableObject {
         }
         return ""
     }
+    
+    func filtrarTurnos(horaActual: String) -> [Turno] {
+        return listaTurno.filter { $0.hora == horaActual }
+    }
 }
 

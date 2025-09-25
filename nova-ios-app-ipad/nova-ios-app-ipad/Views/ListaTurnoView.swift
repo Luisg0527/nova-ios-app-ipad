@@ -10,11 +10,11 @@ struct ListaTurnoView: View {
     @StateObject var turnoService = TurnoService()
     @State private var turnoSeleccionado: Turno?
     @State private var mostrarAlert = false
-
+    @State private var turnoStr: String = ""
     var body: some View {
         VStack(spacing: 20) {
             let turnoStr = turnoService.turnoActual()
-            let turnosFiltrados = turnoService.listaTurno.filter { $0.hora == turnoStr }
+            let turnosFiltrados = turnoService.listaTurno.filter { $0.hora == turnoStr } // $0 representa el turno actual
 
             // Banner superior mostrando turno actual
             RoundedRectangle(cornerRadius: 15)

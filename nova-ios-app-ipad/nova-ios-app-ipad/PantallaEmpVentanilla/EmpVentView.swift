@@ -9,6 +9,7 @@ import SwiftUI
 
 struct EmpVentView: View {
     @State var ventanillaActiva: Bool = true
+    @StateObject var turnoService = TurnoService()
     var body: some View {
         VStack{
             Spacer()
@@ -24,7 +25,10 @@ struct EmpVentView: View {
             HStack{Spacer()}
             
             Button(action:{
-                // algo
+                turnoService.fetchTurnos()
+                let turnoStr = turnoService.turnoActual()
+                let turnosFiltrados = turnoService.filtrarTurnos(horaActual: turnoStr)
+                llamadaApi(idTurno: turnosFiltrados[0].id)
             }){Text("Siguiente turno")
                     .frame(maxWidth: .infinity)
                     .padding(20)
@@ -65,6 +69,9 @@ struct EmpVentView: View {
             )
     }
     
+    func llamadaApi(idTurno: Int){
+        
+    }
     
 }
 
