@@ -4,7 +4,7 @@
 //
 //  Created by Alumno on 23/09/25.
 //
-
+/*
 import Foundation
 
     var listaTurno = obtenerFila()
@@ -20,5 +20,6 @@ func obtenerFila() -> Array<Turno>{
         Turno(id: 7, numTurno: 7, hora: "10:30", prioridad: false)
     ]
     return listaTurno
-    
+
 }
+*/

@@ -4,7 +4,7 @@
 //
 //  Created by Alumno on 23/09/25.
 //
-
+/*
 import Foundation
 
 struct Turno: Identifiable, Codable {
@@ -21,3 +21,4 @@ struct Turno: Identifiable, Codable {
         self.prioridad = prioridad
     }
 }
+*/
