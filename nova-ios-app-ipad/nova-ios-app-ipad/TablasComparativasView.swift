@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct TablasComparativasView: View {
+    //@Binding var selectedTab : Int
+
     var body: some View {
         VStack {
             TabView {

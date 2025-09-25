@@ -18,6 +18,8 @@
 import SwiftUI
 
 struct AdminView: View {
+    //@Binding var selectedTab : Int
+
     var body: some View {
         VStack{
             Text("Fila Turno")
