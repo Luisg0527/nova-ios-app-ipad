@@ -8,8 +8,6 @@
 
 /* Begin PBXFileReference section */
 		BF0D2E332E730165005404C1 /* nova-ios-app-ipad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nova-ios-app-ipad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FBE72F972E8381D000F3CE67 /* nova-ios-app-ipad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "nova-ios-app-ipad.xcodeproj"; path = "nova-ios-app-ipad/nova-ios-app-ipad.xcodeproj"; sourceTree = SOURCE_ROOT; };
-		FBE72FBE2E83842100F3CE67 /* nova-ios-app-ipad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "nova-ios-app-ipad.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -43,20 +41,6 @@
 			isa = PBXGroup;
 			children = (
 				BF0D2E332E730165005404C1 /* nova-ios-app-ipad.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		FBE72F9F2E8381E400F3CE67 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		FBE72FC02E83842100F3CE67 /* Products */ = {
-			isa = PBXGroup;
-			children = (
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -113,16 +97,6 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = BF0D2E342E730165005404C1 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = FBE72F9F2E8381E400F3CE67 /* Products */;
-					ProjectRef = FBE72F972E8381D000F3CE67 /* nova-ios-app-ipad.xcodeproj */;
-				},
-				{
-					ProductGroup = FBE72FC02E83842100F3CE67 /* Products */;
-					ProjectRef = FBE72FBE2E83842100F3CE67 /* nova-ios-app-ipad.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				BF0D2E322E730165005404C1 /* nova-ios-app-ipad */,
