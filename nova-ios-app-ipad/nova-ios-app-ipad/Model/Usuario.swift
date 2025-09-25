@@ -18,9 +18,9 @@ struct Usuario: Codable {
         self.fechaNacimiento = fechaNacimiento
     }
     init() {
-        self.nombre = "payolo"
-        self.identificadorU = "ADM010"
-        self.fechaNacimiento = "01/10/2004"
+        self.nombre = "Nombre"
+        self.identificadorU = "CL000"
+        self.fechaNacimiento = "01 ene 2000"
     }
 }
 
