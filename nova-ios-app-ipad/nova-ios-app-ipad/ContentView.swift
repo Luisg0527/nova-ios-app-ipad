@@ -23,6 +23,7 @@ struct ContentView: View {
                         Image(systemName: "doc.richtext.fill")
                         Text("Detalles")
                     }
+                
             }
             .indexViewStyle(.page)
             

@@ -9,6 +9,15 @@ import Foundation
 
 var listaEmpleadosVentanilla: Array<EmpleadoVentanilla> = callAPIListaJson()
 
+var usuario: Usuario = {
+    if let nombre = UserDefaults.standard.string(forKey: "nombreUsuario"), !nombre.isEmpty {
+        return getDetallesUsr(nombreUsuario: nombre)
+    } else {
+        return Usuario() 
+    }
+}()
+
+
 func callAPIListaJson() -> Array<EmpleadoVentanilla> {
         
         var empleadoVListaRegresar: Array<EmpleadoVentanilla> = []
