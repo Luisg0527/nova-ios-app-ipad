@@ -8,7 +8,7 @@
 import Foundation
 
 // Modelo de Usuario
-struct Usuario: Identifiable {
+struct UsuarioMockLol: Identifiable {
     let id: Int
     let nombreUsuario: String
     var password: String
@@ -16,10 +16,10 @@ struct Usuario: Identifiable {
 
 // Mock de usuarios hardcodeados
 class UsuarioMock {
-    static var usuarios: [Usuario] = [
-        Usuario(id: 1, nombreUsuario: "juanperez", password: "1234"),
-        Usuario(id: 2, nombreUsuario: "maria", password: "abcd"),
-        Usuario(id: 3, nombreUsuario: "admin", password: "admin123")
+    static var usuarios: [UsuarioMockLol] = [
+        UsuarioMockLol(id: 1, nombreUsuario: "juanperez", password: "1234"),
+        UsuarioMockLol(id: 2, nombreUsuario: "maria", password: "abcd"),
+        UsuarioMockLol(id: 3, nombreUsuario: "admin", password: "admin123")
     ]
     
     // Validar login
