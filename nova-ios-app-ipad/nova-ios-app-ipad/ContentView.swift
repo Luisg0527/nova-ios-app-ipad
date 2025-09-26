@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-<<<<<<< Updated upstream
     @State private var mostrarLogin: Bool = false
-
+    
     init() {
         if let _ = UserDefaults.standard.string(forKey: "nombreUsuario") {
             _mostrarLogin = State(initialValue: false)
@@ -18,67 +17,40 @@ struct ContentView: View {
             _mostrarLogin = State(initialValue: true)
         }
     }
-
+    
     var body: some View {
-        Group {
-            if mostrarLogin {
-                InicioSesionView(mostrarLogin: $mostrarLogin)
-            } else {
-                VStack {
-                    TabView{
-                        TablasComparativasView()
-                            .tabItem {
-                                Image(systemName: "house.circle")
-                                Text("Home")
-                            }
-                        AdminView()
-                            .tabItem {
-                                Image(systemName: "doc.richtext.fill")
-                                Text("Detalles")
-                            }
-                        UsuarioView(mostrarLogin: $mostrarLogin)
-                            .tabItem {
-                                Image(systemName: "doc.richtext.fill")
-                                Text("Usuario")
-                            }
-                    }
-                    .indexViewStyle(.page)
+        if mostrarLogin {
+            InicioSesionView(mostrarLogin: $mostrarLogin)
+        } else {
+            VStack {
+                TabView{
+                    TablasComparativasView()
+                        .tabItem {
+                            Image(systemName: "house.circle")
+                            Text("Home")
+                        }
+                    AdminView()
+                        .tabItem {
+                            Image(systemName: "doc.richtext.fill")
+                            Text("Detalles")
+                        }
+                    UsuarioView(mostrarLogin: $mostrarLogin)
+                        .tabItem {
+                            Image(systemName: "doc.richtext.fill")
+                            Text("Usuario")
+                        }
+                    EmpVentView()
+                        .tabItem {
+                            Image(systemName: "doc.richtext.fill")
+                            Text("Empleado")
+                        }
                 }
+                .indexViewStyle(.page)
             }
-=======
-    //@State private var selectedTab = 0
-    var body: some View {
-        VStack {
-            TabView{
-                TablasComparativasView()
-                    .tabItem {
-                        Image(systemName: "house.circle") //Emoji de casa
-                        Text("Home")
-                        
-                    }
-                AdminView()
-                    .tabItem {
-                        Image(systemName: "doc.richtext.fill")
-                        Text("Detalles")
-                    }
-                UsuarioView()
-                    .tabItem {
-                        Image(systemName: "doc.richtext.fill")
-                        Text("Usuario")
-                    }
-                EmpVentView()
-                    .tabItem {
-                        Image(systemName: "doc.richtext.fill")
-                        Text("Empleado")
-                    }
-            }
-            .indexViewStyle(.page)
-            
->>>>>>> Stashed changes
         }
     }
-}
-
-#Preview {
-    ContentView()
+    
+    #Preview {
+        ContentView()
+    }
 }
