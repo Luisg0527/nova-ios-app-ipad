@@ -9,12 +9,16 @@ import SwiftUI
 
 struct EmpVentView: View {
     @State var ventanillaActiva: Bool = true
+    @State private var numeroEmpleado = "EMP001"
     @State var turno: Int = -1
     @StateObject private var turnoService = TurnoService()
     @State private var isProcessing = false
     @State private var showAlert = false
     @State private var alertMessage = ""
     var body: some View {
+        VStack{
+            
+        
         VStack{
             Spacer()
             
@@ -64,6 +68,7 @@ struct EmpVentView: View {
                 //.padding(.bottom, 32)
             
             Button(action:{
+                toggleEmpleadoVentanilla(numEmpleado: numeroEmpleado)
                 ventanillaActiva.toggle()
             }){Text(ventanillaActiva ? "Cerrar ventanilla" : "Abrir ventanilla")
                     .frame(maxWidth: .infinity)
@@ -87,6 +92,7 @@ struct EmpVentView: View {
         .background(
             LinearGradient(gradient: Gradient(colors: [Color(red: 1/255, green: 104/255, blue: 138/255), Color(red: 0/255, green: 66/255, blue: 88/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
             )
+        }
     }
     
     func llamadaApi(idTurno: Int){
@@ -127,8 +133,45 @@ struct EmpVentView: View {
                 return
     }
     
-    func cerrarVentanilla(identU: String){
+    func toggleEmpleadoVentanilla(numEmpleado: String) {
+        guard let url = URL(string: "http://10.14.255.42:10205/empleadoV/toggle/\(numEmpleado)") else {
+            print("URL inválida")
+            return
+        }
         
+        var request = URLRequest(url: url)
+        request.httpMethod = "PUT"
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("Error en la llamada: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let httpResponse = response as? HTTPURLResponse else {
+                print("Respuesta no válida del servidor")
+                return
+            }
+            
+            switch httpResponse.statusCode {
+            case 200:
+                if let data = data,
+                   let datosAPI = String(data: data, encoding: .utf8) {
+                    print("Éxito: \(datosAPI)")
+                    // Aquí puedes parsear el JSON si necesitas actualizar el UI
+                }
+            case 404:
+                print("No se encontró el empleado con ese número")
+            default:
+                print("Código de error del API: \(httpResponse.statusCode)")
+                if let data = data,
+                   let errorMessage = String(data: data, encoding: .utf8) {
+                    print("Mensaje de error: \(errorMessage)")
+                }
+            }
+        }
+        task.resume()
     }
     
 }

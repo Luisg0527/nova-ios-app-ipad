@@ -44,6 +44,32 @@ struct ContentView: View {
                     .indexViewStyle(.page)
                 }
             }
+        VStack {
+            TabView{
+                TablasComparativasView()
+                    .tabItem {
+                        Image(systemName: "house.circle") //Emoji de casa
+                        Text("Home")
+                        
+                    }
+                AdminView()
+                    .tabItem {
+                        Image(systemName: "doc.richtext.fill")
+                        Text("Detalles")
+                    }
+                UsuarioView()
+                    .tabItem {
+                        Image(systemName: "doc.richtext.fill")
+                        Text("Usuario")
+                    }
+                EmpVentView()
+                    .tabItem {
+                        Image(systemName: "doc.richtext.fill")
+                        Text("Empleado")
+                    }
+            }
+            .indexViewStyle(.page)
+            
         }
     }
 }
