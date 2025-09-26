@@ -47,16 +47,16 @@ class TurnoService: ObservableObject {
     }
     
     // Actualizar prioridad
-    func updatePrioridad(turno: Turno) {
+    func updatePrioridad(id: Int, prioridadNueva: Int) {
         var request = URLRequest(url: updatePrioridadURL)
-        request.httpMethod = "POST"
+        request.httpMethod = "PUT" // 👈 Cambiado de POST a PUT
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // Enviar id y el nuevo valor de prioridad
         let body: [String: Any] = [
-            "id": turno.id,
-            "prioridad": !turno.prioridad  // invierte la prioridad actual
+            "id": id,
+            "prioridad": prioridadNueva
         ]
+        
         request.httpBody = try? JSONSerialization.data(withJSONObject: body)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
@@ -64,7 +64,12 @@ class TurnoService: ObservableObject {
                 print("Error updatePrioridad:", error)
                 return
             }
-            // Refrescar lista después de actualizar
+            if let httpResponse = response as? HTTPURLResponse {
+                print("📥 Status code:", httpResponse.statusCode)
+            }
+            if let data = data, let str = String(data: data, encoding: .utf8) {
+                print("📥 Respuesta:", str)
+            }
             self.fetchTurnos()
         }
         task.resume()

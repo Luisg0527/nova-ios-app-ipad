@@ -17,13 +17,18 @@ struct ListaTurnoView: View {
             let turnosFiltrados = turnoService.listaTurno.filter { $0.hora == turnoStr } // $0 representa el turno actual
 
             // Banner superior mostrando turno actual
+            let turnosConPrioridad = turnoService.listaTurno.filter { $0.prioridad }
             RoundedRectangle(cornerRadius: 15)
-                .fill(turnosFiltrados.isEmpty ? Color.gray : Color.yellow)
+                .fill(turnosConPrioridad.isEmpty ? Color.gray : Color.yellow)
                 .frame(height: 50)
                 .overlay(
-                    Text(turnosFiltrados.isEmpty ? "" : "Turno(s) hora \(turnoStr)")
-                        .foregroundColor(.black)
-                        .font(.headline)
+                    Text(
+                        turnosConPrioridad.isEmpty
+                        ? "Sin prioridad"
+                        : "Prioridad Turno: \(turnosConPrioridad.map { "\($0.id)" }.joined(separator: ", "))"
+                    )
+                    .foregroundColor(.black)
+                    .font(.headline)
                 )
                 .padding(.horizontal, 100)
 
@@ -31,6 +36,7 @@ struct ListaTurnoView: View {
                 Spacer()
                 List(turnosFiltrados) { turnoItem in
                     TurnoRow(turno: turnoItem)
+                        .listRowBackground(Color.clear)
                         .onTapGesture {
                             turnoSeleccionado = turnoItem
                             mostrarAlert = true
@@ -38,19 +44,21 @@ struct ListaTurnoView: View {
                 }
                 .listStyle(.inset)
                 .frame(width: 600, height: 750)
+                .scrollContentBackground(.hidden)
                 .cornerRadius(20)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 20)
-                        .stroke(Color.black, lineWidth: 2)
-                )
+                .background(
+                    LinearGradient(gradient: Gradient(colors: [Color(red: 1/255, green: 104/255, blue: 138/255), Color(red: 0/255, green: 66/255, blue: 88/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                    )
+                .cornerRadius(20)
+                
+                
                 Spacer()
             }
         }
         .alert("Dar prioridad a este turno?", isPresented: $mostrarAlert, actions: {
             Button("Sí") {
                 if let turno = turnoSeleccionado {
-                    // Llamada al endpoint para cambiar prioridad en la DB
-                    turnoService.updatePrioridad(turno: turno)
+                    turnoService.updatePrioridad(id: turno.id, prioridadNueva: 1)
                 }
             }
             Button("Cancelar", role: .cancel) {}
