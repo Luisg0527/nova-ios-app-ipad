@@ -10,11 +10,12 @@ import SwiftUI
 struct EmpVentView: View {
     @State var ventanillaActiva: Bool = true
     @StateObject var turnoService = TurnoService()
+    @State var turno: Int = 0
     var body: some View {
         VStack{
             Spacer()
             
-            Text("Turno #")
+            Text("Turno # \(turno)")
                 .font(.system(size: 60, weight: .bold))
                 .foregroundStyle(Color(red: 255/255, green: 153/255, blue: 0/255))
             
@@ -25,10 +26,21 @@ struct EmpVentView: View {
             HStack{Spacer()}
             
             Button(action:{
-                turnoService.fetchTurnos()
-                let turnoStr = turnoService.turnoActual()
-                let turnosFiltrados = turnoService.filtrarTurnos(horaActual: turnoStr)
-                llamadaApi(idTurno: turnosFiltrados[0].id)
+                Task {
+                    await turnoService.fetchTurnos()
+                    let turnoStr = turnoService.turnoActual()
+                    let filtrados = turnoService.listaTurno.filter { $0.hora == turnoStr }
+                    print("Turno actual: \(turnoStr)")
+                    print("Filtrados: \(filtrados.map { $0.id })")
+                    
+                    if let id = filtrados.first?.id {
+                        llamadaApi(idTurno: id)
+                        await turnoService.fetchTurnos() // refresca lista después de borrar
+                    } else {
+                        print("No hay turnos filtrados disponibles")
+                    }
+                }
+                
             }){Text("Siguiente turno")
                     .frame(maxWidth: .infinity)
                     .padding(20)
@@ -70,6 +82,44 @@ struct EmpVentView: View {
     }
     
     func llamadaApi(idTurno: Int){
+        guard let url = URL(string:"http://10.14.255.42:10205/filaPop/\(idTurno)") else{
+                    return
+                }
+        
+                var request = URLRequest(url: url)
+                request.httpMethod = "DELETE"
+                
+                let task = URLSession.shared.dataTask(with: request){
+                    data, response, error in
+                    
+                    if error != nil {
+                        print("Error en la llamada: \(error!.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let httpResponse = response as? HTTPURLResponse else {
+                        print("Respuesta no válida del servidor")
+                        return
+                    }
+                    
+                    if (httpResponse.statusCode != 200){
+                        print("Código de error del API: \(httpResponse.statusCode)")
+                        return
+                    }
+                    
+                    if (data != nil){
+                        if let datosAPI = String(data: data!, encoding: .utf8){
+                            print("Respuesta del API: \(datosAPI)")
+                        }
+                    }else{
+                        print("No se recibieron datos")
+                    }
+                }
+                task.resume()
+                return
+    }
+    
+    func cerrarVentanilla(identU: String){
         
     }
     
