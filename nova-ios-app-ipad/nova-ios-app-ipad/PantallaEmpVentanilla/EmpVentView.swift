@@ -9,13 +9,16 @@ import SwiftUI
 
 struct EmpVentView: View {
     @State var ventanillaActiva: Bool = true
-    @StateObject var turnoService = TurnoService()
-    @State var turno: Int = 0
+    @State var turno: Int = -1
+    @StateObject private var turnoService = TurnoService()
+    @State private var isProcessing = false
+    @State private var showAlert = false
+    @State private var alertMessage = ""
     var body: some View {
         VStack{
             Spacer()
             
-            Text("Turno # \(turno)")
+            Text(turno != -1 ? "Turno # \(String(turno))" : "Cargando...")
                 .font(.system(size: 60, weight: .bold))
                 .foregroundStyle(Color(red: 255/255, green: 153/255, blue: 0/255))
             
@@ -28,19 +31,24 @@ struct EmpVentView: View {
             Button(action:{
                 Task {
                     await turnoService.fetchTurnos()
+                    
+                    try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 segundos
+                    
                     let turnoStr = turnoService.turnoActual()
                     let filtrados = turnoService.listaTurno.filter { $0.hora == turnoStr }
                     print("Turno actual: \(turnoStr)")
                     print("Filtrados: \(filtrados.map { $0.id })")
                     
-                    if let id = filtrados.first?.id {
+                    let turnoABorrar = filtrados.first(where: { $0.prioridad == true }) ?? filtrados.first
+                    
+                    if let id = turnoABorrar?.id {
                         llamadaApi(idTurno: id)
-                        await turnoService.fetchTurnos() // refresca lista después de borrar
+                        turno = id
+                        await turnoService.fetchTurnos()
                     } else {
                         print("No hay turnos filtrados disponibles")
                     }
                 }
-                
             }){Text("Siguiente turno")
                     .frame(maxWidth: .infinity)
                     .padding(20)

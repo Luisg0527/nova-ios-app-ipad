@@ -103,8 +103,98 @@ class TurnoService: ObservableObject {
         return ""
     }
     
-    func filtrarTurnos(horaActual: String) -> [Turno] {
-        return listaTurno.filter { $0.hora == horaActual }
-    }
+    func borrarTurno(id: Int) async -> Bool {
+            guard let url = URL(string: "http://10.14.255.42:10205/filaPop/\(id)") else {
+                print("URL inválida para borrar turno")
+                return false
+            }
+            
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            
+            do {
+                let (data, response) = try await URLSession.shared.data(for: request)
+                
+                guard let httpResponse = response as? HTTPURLResponse else {
+                    print("Respuesta no válida del servidor")
+                    return false
+                }
+                
+                if httpResponse.statusCode == 200 {
+                    if let datosAPI = String(data: data, encoding: .utf8) {
+                        print("Respuesta del API: \(datosAPI)")
+                    }
+                    return true
+                } else if httpResponse.statusCode == 404 {
+                    print("No se encontró el registro con id: \(id)")
+                    return false
+                } else {
+                    print("Código de error del API: \(httpResponse.statusCode)")
+                    return false
+                }
+            } catch {
+                print("Error en la llamada: \(error.localizedDescription)")
+                return false
+            }
+        }
+        
+        // Método combinado para borrar turno actual
+        func borrarTurnoActual() async -> (success: Bool, id: Int?) {
+            // Si la lista está vacía, cargar primero
+            if listaTurno.isEmpty {
+                print("Lista vacía, cargando turnos...")
+                await fetchTurnos()
+                
+                // Pequeña espera para asegurar que el estado se actualice
+                try? await Task.sleep(nanoseconds: 100_000_000) // 0.1 segundos
+            }
+            
+            let turnoStr = turnoActual()
+            let filtrados = listaTurno.filter { $0.hora == turnoStr }
+            
+            print("Turno actual: \(turnoStr)")
+            print("Total turnos en lista: \(listaTurno.count)")
+            print("Turnos filtrados: \(filtrados.map { $0.id })")
+            
+            let turnoABorrar = filtrados.first(where: { $0.prioridad == true }) ?? filtrados.first
+            
+            guard let id = turnoABorrar?.id else {
+                print("No hay turnos disponibles para el horario \(turnoStr)")
+                return (false, nil)
+            }
+            
+            print("Borrando turno ID: \(id), prioridad: \(turnoABorrar?.prioridad ?? false)")
+            
+            // Borrar el turno
+            let success = await borrarTurno(id: id)
+            
+            if success {
+                // Actualizar la lista después de borrar
+                await fetchTurnos()
+            }
+            
+            return (success, id)
+        }
+        
+        // Actualizar prioridad - convertido a async/await
+        func updatePrioridad(turno: Turno) async {
+            var request = URLRequest(url: updatePrioridadURL)
+            request.httpMethod = "POST"
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+            
+            let body: [String: Any] = [
+                "id": turno.id,
+                "prioridad": !turno.prioridad
+            ]
+            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
+            
+            do {
+                let (_, _) = try await URLSession.shared.data(for: request)
+                // Refrescar lista después de actualizar
+                await fetchTurnos()
+            } catch {
+                print("Error updatePrioridad:", error)
+            }
+        }
 }
 
