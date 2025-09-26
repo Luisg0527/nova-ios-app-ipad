@@ -24,7 +24,7 @@ struct TurnoRow: View {
                Spacer()
            }
            .padding()
-           .background(turno.prioridad ? Color.yellow.opacity(0.5) : Color(red: 242/255, green: 242/255, blue: 242/255))
+           .background(turno.prioridad ? Color(red: 255/255, green: 153/255, blue: 0/255).opacity(0.2) : Color(red: 242/255, green: 242/255, blue: 242/255))
            .cornerRadius(10)
            .shadow(radius: 1)
        }

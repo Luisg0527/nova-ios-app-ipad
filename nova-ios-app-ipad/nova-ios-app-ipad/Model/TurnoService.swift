@@ -22,7 +22,7 @@ class TurnoService: ObservableObject {
     private let getFilaURL = URL(string: "http://10.14.255.42:10205/get_fila")!
     private let updatePrioridadURL = URL(string: "http://10.14.255.42:10205/update_prioridad")!
     
-    // Traer turnos desde API
+   
     func fetchTurnos() {
         let task = URLSession.shared.dataTask(with: getFilaURL) { data, response, error in
             if let error = error {
@@ -46,10 +46,10 @@ class TurnoService: ObservableObject {
         task.resume()
     }
     
-    // Actualizar prioridad
+    
     func updatePrioridad(id: Int, prioridadNueva: Int) {
         var request = URLRequest(url: updatePrioridadURL)
-        request.httpMethod = "PUT" // 👈 Cambiado de POST a PUT
+        request.httpMethod = "PUT"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
         let body: [String: Any] = [
@@ -65,10 +65,10 @@ class TurnoService: ObservableObject {
                 return
             }
             if let httpResponse = response as? HTTPURLResponse {
-                print("📥 Status code:", httpResponse.statusCode)
+                print(" Status code:", httpResponse.statusCode)
             }
             if let data = data, let str = String(data: data, encoding: .utf8) {
-                print("📥 Respuesta:", str)
+                print("Respuesta:", str)
             }
             self.fetchTurnos()
         }
@@ -177,24 +177,6 @@ class TurnoService: ObservableObject {
         }
         
         // Actualizar prioridad - convertido a async/await
-        func updatePrioridad(turno: Turno) async {
-            var request = URLRequest(url: updatePrioridadURL)
-            request.httpMethod = "POST"
-            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-            
-            let body: [String: Any] = [
-                "id": turno.id,
-                "prioridad": !turno.prioridad
-            ]
-            request.httpBody = try? JSONSerialization.data(withJSONObject: body)
-            
-            do {
-                let (_, _) = try await URLSession.shared.data(for: request)
-                // Refrescar lista después de actualizar
-                await fetchTurnos()
-            } catch {
-                print("Error updatePrioridad:", error)
-            }
-        }
+        
 }
 

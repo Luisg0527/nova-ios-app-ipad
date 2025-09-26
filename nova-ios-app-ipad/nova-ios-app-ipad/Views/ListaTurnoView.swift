@@ -18,11 +18,11 @@ struct ListaTurnoView: View {
             let turnoStr = turnoService.turnoActual()
             let turnosFiltrados = turnoService.listaTurno.filter { $0.hora == turnoStr } // $0 representa el turno actual
 
-            // Banner superior mostrando turno actual
+            
             let turnosConPrioridad = turnoService.listaTurno.filter { $0.prioridad }
-            RoundedRectangle(cornerRadius: 15)
-                .fill(turnosConPrioridad.isEmpty ? Color.gray : Color.yellow)
-                .frame(height: 50)
+            RoundedRectangle(cornerRadius: 25)  
+                .fill(turnosConPrioridad.isEmpty ? Color.gray : Color(red: 255/255, green: 153/255, blue: 0/255).opacity(0.8))
+                .frame(height: 80)
                 .overlay(
                     Text(
                         turnosConPrioridad.isEmpty
@@ -30,16 +30,19 @@ struct ListaTurnoView: View {
                         : "Prioridad Turno: \(turnosConPrioridad.map { "\($0.id)" }.joined(separator: ", "))"
                     )
                     .foregroundColor(.black)
-                    .font(.headline)
+                    .font(.system(size: 28, weight: .bold))
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
                 )
-                .padding(.horizontal, 100)
+                .padding(.horizontal, 110)
+                
 
             HStack {
                 Spacer()
                 List {
                     ForEach(turnoService.listaTurno.indices, id: \.self) { index in
                         let turno = turnoService.listaTurno[index]
-                        // Aquí filtras solo los que quieras mostrar
+                        
                         if turno.hora == turnoService.turnoActual() {
                             TurnoRow(turno: $turnoService.listaTurno[index])
                                 .listRowBackground(Color.clear)
@@ -67,6 +70,7 @@ struct ListaTurnoView: View {
                             ),
                             lineWidth: 3
                         )
+                        
                 )
                 
                 
