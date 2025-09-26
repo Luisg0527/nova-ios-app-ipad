@@ -9,89 +9,125 @@ import SwiftUI
 
 struct CambiarContrasenaView: View {
     @State private var usuario: String = ""
-    @State private var oldPassword: String = ""
     @State private var newPassword: String = ""
     @State private var confirmarPassword: String = ""
     @State private var mensaje: String = ""
     
-    // Para cerrar la vista (regresar)
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
-        VStack(spacing: 25) {
+        VStack(spacing: 30) {
             
-            // Encabezado con botón regresar
-            HStack {
-                Button(action: {
-                    dismiss() // Cierra esta pantalla
-                }) {
-                    Image(systemName: "chevron.left")
-                        .foregroundColor(.blue)
-                        .font(.title2)
-                }
-                Spacer()
-                Text("Cambiar Contraseña")
-                    .font(.headline)
-                    .fontWeight(.bold)
-                Spacer()
-                // Espacio vacío para balancear
-                Spacer().frame(width: 40)
-            }
-            .padding(.horizontal, 20)
-            .padding(.top, 20)
+            // Logo arriba
+            Image("Nova-logo")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 160, height: 160)
+                .padding(.top, 50)
+            
+            // Título
+            Text("Cambiar Contraseña")
+                .font(.system(size: 34, weight: .bold))
+                .padding(.top, 5)
             
             // Usuario
             TextField("Usuario", text: $usuario)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .font(.system(size: 22))
+                .padding()
+                .frame(height: 65)
+                .background(Color(.systemGray6))
+                .cornerRadius(12)
                 .padding(.horizontal, 40)
-            
-            // Contraseña actual
-            SecureField("Contraseña actual", text: $oldPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding(.horizontal, 40)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled(true)
             
             // Nueva contraseña
             SecureField("Nueva contraseña", text: $newPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .font(.system(size: 22))
+                .padding()
+                .frame(height: 65)
+                .background(Color(.systemGray6))
+                .cornerRadius(12)
                 .padding(.horizontal, 40)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled(true)
             
             // Confirmar nueva contraseña
             SecureField("Confirmar nueva contraseña", text: $confirmarPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .font(.system(size: 22))
+                .padding()
+                .frame(height: 65)
+                .background(Color(.systemGray6))
+                .cornerRadius(12)
                 .padding(.horizontal, 40)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled(true)
             
-            // Botón de actualizar
+            // Botón actualizar
             Button(action: {
                 if newPassword != confirmarPassword {
-                    mensaje = "Las contraseñas no coinciden ❌"
-                } else if UsuarioMock.cambiarPassword(nombreUsuario: usuario, oldPassword: oldPassword, newPassword: newPassword) {
-                    mensaje = "Contraseña cambiada correctamente ✅"
+                    mensaje = "Las contraseñas no coinciden"
                 } else {
-                    mensaje = "Error al cambiar contraseña ❌"
+                    let respuesta = changePasswordAPI(nombreUsuario: usuario, newPassword: newPassword)
+                    
+                    if let msg = respuesta.message, msg.lowercased().contains("correctamente") {
+                        mensaje = msg
+                    } else {
+                        mensaje = respuesta.error ?? "Error al cambiar contraseña"
+                    }
                 }
             }) {
                 Text("Actualizar Contraseña")
+                    .font(.system(size: 22, weight: .semibold))
                     .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.green)
+                    .frame(height: 65)
+                    .background(Color(red: 1/255, green: 104/255, blue: 138/255))
                     .foregroundColor(.white)
-                    .cornerRadius(12)
+                    .cornerRadius(20)
                     .padding(.horizontal, 40)
             }
             
-            // Mensaje de resultado
+            // Botón regresar
+            Button(action: {
+                dismiss()
+            }) {
+                Text("Regresar")
+                    .font(.system(size: 20))
+                    .frame(maxWidth: .infinity)
+                    .frame(height: 55)
+                    .background(Color(.systemGray5))
+                    .foregroundColor(.blue)
+                    .cornerRadius(12)
+                    .padding(.horizontal, 40)
+            }
+            .padding(.top, 5)
+            
+            // Mensaje
             if !mensaje.isEmpty {
                 Text(mensaje)
-                    .foregroundColor(mensaje.contains("✅") ? .green : .red)
+                    .foregroundColor(mensaje.lowercased().contains("correctamente") ? .green : .red)
                     .font(.subheadline)
                     .padding(.top, 10)
             }
             
             Spacer()
         }
+        .frame(width: 650)
+        .padding(100)
+        
+        ZStack {
+            Rectangle()
+                .fill(Color(red: 255/255, green: 153/255, blue: 0/255))
+                .frame(width: 1000, height: 100)
+                .rotationEffect(.degrees(170))
+            
+            Rectangle()
+                .fill(Color(red: 1/255, green: 104/255, blue: 138/255))
+                .frame(width: 1000, height: 100)
+        }
+        .padding(.bottom, 30)
     }
 }
-
 
 #Preview {
     CambiarContrasenaView()

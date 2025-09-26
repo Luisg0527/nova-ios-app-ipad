@@ -8,6 +8,8 @@
 
 /* Begin PBXFileReference section */
 		BF0D2E332E730165005404C1 /* nova-ios-app-ipad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nova-ios-app-ipad.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FB396D192E8600B50069FE5D /* nova-ios-app-ipad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "nova-ios-app-ipad.xcodeproj"; sourceTree = "<group>"; };
+		FB396D352E8600B50069FE5D /* nova-ios-app-ipad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "nova-ios-app-ipad.xcodeproj"; sourceTree = "<group>"; };
 		FBE72F972E8381D000F3CE67 /* nova-ios-app-ipad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "nova-ios-app-ipad.xcodeproj"; path = "nova-ios-app-ipad/nova-ios-app-ipad.xcodeproj"; sourceTree = SOURCE_ROOT; };
 		FBE72FBE2E83842100F3CE67 /* nova-ios-app-ipad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = "nova-ios-app-ipad.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -44,6 +46,16 @@
 			children = (
 				BF0D2E332E730165005404C1 /* nova-ios-app-ipad.app */,
 			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB396D372E8600B50069FE5D /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FB396D392E8600B50069FE5D /* Products */ = {
+			isa = PBXGroup;
 			name = Products;
 			sourceTree = "<group>";
 		};
@@ -121,6 +133,14 @@
 				{
 					ProductGroup = FBE72FC02E83842100F3CE67 /* Products */;
 					ProjectRef = FBE72FBE2E83842100F3CE67 /* nova-ios-app-ipad.xcodeproj */;
+				},
+				{
+					ProductGroup = FB396D392E8600B50069FE5D /* Products */;
+					ProjectRef = FB396D192E8600B50069FE5D /* nova-ios-app-ipad.xcodeproj */;
+				},
+				{
+					ProductGroup = FB396D372E8600B50069FE5D /* Products */;
+					ProjectRef = FB396D352E8600B50069FE5D /* nova-ios-app-ipad.xcodeproj */;
 				},
 			);
 			projectRoot = "";
