@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+<<<<<<< Updated upstream
     @State private var mostrarLogin: Bool = false
 
     init() {
@@ -44,6 +45,9 @@ struct ContentView: View {
                     .indexViewStyle(.page)
                 }
             }
+=======
+    //@State private var selectedTab = 0
+    var body: some View {
         VStack {
             TabView{
                 TablasComparativasView()
@@ -70,6 +74,7 @@ struct ContentView: View {
             }
             .indexViewStyle(.page)
             
+>>>>>>> Stashed changes
         }
     }
 }
