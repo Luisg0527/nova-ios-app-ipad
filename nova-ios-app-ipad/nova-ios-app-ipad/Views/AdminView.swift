@@ -24,7 +24,7 @@ struct AdminView: View {
         VStack{
             Text("Fila Turno")
                 .font(.system(size: 60, weight: .bold))
-                .foregroundColor(Color(red: 68/255, green: 100/255, blue: 173/255))
+                .foregroundColor(Color(red: 0/255, green: 66/255, blue: 88/255))
                 .padding(.bottom,20)
                 .multilineTextAlignment(.center)
             
@@ -34,10 +34,7 @@ struct AdminView: View {
             
             
         }
-        .frame(height: 450)
-        .background(
-            LinearGradient(gradient: Gradient(colors: [Color(red: 1/255, green: 104/255, blue: 138/255), Color(red: 0/255, green: 66/255, blue: 88/255)]), startPoint: .topLeading, endPoint: .bottomTrailing)
-        )
+        
         
     }
 }

@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct TurnoRow: View {
-    @State public var turno: Turno
+    @Binding public var turno: Turno
        
        var body: some View {
            HStack {
                VStack(alignment: .leading, spacing: 5) {
                    Text("Turno: \(turno.id)")
                        .font(.system(size: 40))
-                       .foregroundStyle(Color(red: 255/255, green: 153/255, blue: 0/255))
+                       .foregroundStyle(turno.prioridad ? Color.black : Color(red: 0/255, green: 66/255, blue: 88/255))
                        .fontWeight(.bold)
                    Text("Hora: \(turno.hora)")
                        .font(.title2)
-                       .foregroundColor(.gray)
+                       .foregroundStyle(turno.prioridad ? Color.black : Color.gray)
                }
                Spacer()
            }
@@ -31,5 +31,5 @@ struct TurnoRow: View {
    }
 
    #Preview {
-       TurnoRow(turno: Turno(id: 1, hora: "09:00", prioridad: false))
+       TurnoRow(turno: .constant(Turno(id: 1, hora: "09:00", prioridad: false)))
    }
