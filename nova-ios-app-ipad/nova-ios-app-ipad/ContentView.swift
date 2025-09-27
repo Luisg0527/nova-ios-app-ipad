@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var mostrarLogin: Bool = false
+    @State private var sesionAdmin: Bool = true
     
     init() {
         if let _ = UserDefaults.standard.string(forKey: "nombreUsuario") {
@@ -27,12 +28,12 @@ struct ContentView: View {
                     TablasComparativasView()
                         .tabItem {
                             Image(systemName: "house.circle")
-                            Text("Home")
+                            Text("Dashboard")
                         }
                     AdminView()
                         .tabItem {
                             Image(systemName: "doc.richtext.fill")
-                            Text("Detalles")
+                            Text("Fila")
                         }
                     UsuarioView(mostrarLogin: $mostrarLogin)
                         .tabItem {

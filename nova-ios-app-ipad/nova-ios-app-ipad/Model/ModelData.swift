@@ -18,6 +18,15 @@ var usuario: Usuario = {
 }()
 
 
+func updateUsr() {
+    if let nombre = UserDefaults.standard.string(forKey: "nombreUsuario"), !nombre.isEmpty {
+        usuario = getDetallesUsr(nombreUsuario: nombre)
+    } else {
+        return usuario = Usuario()
+    }
+}
+
+
 func callAPIListaJson() -> Array<EmpleadoVentanilla> {
         
         var empleadoVListaRegresar: Array<EmpleadoVentanilla> = []

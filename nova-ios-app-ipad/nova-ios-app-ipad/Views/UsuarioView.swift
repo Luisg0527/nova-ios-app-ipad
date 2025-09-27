@@ -14,6 +14,8 @@ struct UsuarioView: View {
     var username: String {
         UserDefaults.standard.string(forKey: "nombreUsuario") ?? ""
     }
+    
+    var thisUser: Usuario = getDetallesUsr(nombreUsuario: UserDefaults.standard.string(forKey: "nombreUsuario") ?? "")
 
     var body: some View {
         VStack {
@@ -41,7 +43,7 @@ struct UsuarioView: View {
             }
             
             HStack{
-                Text("\(usuario.nombre)")
+                Text("\(thisUser.nombre)")
                     .font(.system(size: 58))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
@@ -81,7 +83,7 @@ struct UsuarioView: View {
             }
             
             HStack{
-                Text("\(formatFechaNacimiento(usuario.fechaNacimiento))")
+                Text("\(formatFechaNacimiento(thisUser.fechaNacimiento))")
                     .font(.system(size: 58))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
@@ -101,7 +103,7 @@ struct UsuarioView: View {
             }
             
             HStack{
-                Text("\(usuario.identificadorU)")
+                Text("\(thisUser.identificadorU)")
                     .font(.system(size: 58))
                     .fontWeight(.bold)
                     .foregroundStyle(Color(red: 102/255, green: 102/255, blue: 102/255))
